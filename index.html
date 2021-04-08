@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Hex-based map generator">
+    <meta name="author" content="Dablux">
+    <meta property="og:description" content="Hex-based map generator">
+    <meta property="og:title" content="Hexos">
+    <meta name="twitter:title" content="Hexos">
+    <meta name="twitter:description"   content="Hex-based map generator">
+
+    <title>Hexos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel='shortcut icon' href='favicon.ico' type='image/x-icon' />
+</head>
+
+<body onload="setup()">
+    <canvas id="canvas"
+        style="z-index: 1;
+        position:absolute;
+        left:0px;
+        top:0px;
+        " height="300px" width="400">
+        This text is displayed if your browser does not support HTML5 Canvas.
+    </canvas>
+    <canvas id="cursorCanvas"
+        style="z-index: 3;
+        position:absolute;
+        left:0px;
+        top:0px;
+        " height="300px" width="400">
+        This text is displayed if your browser does not support HTML5 Canvas.
+    </canvas>
+    <h1 id ="seed"
+        style="z-index:2>";
+    </h1>
+    <script src='lib/hex_lib.js'></script>
+    <script src='lib/seedable_rng.js'></script>
+    <script src='js/game.js'></script>
+    <script src='js/map.js'></script>
+    <script src='js/tile.js'></script>
+    <script src='js/index.js'></script>
+    </body>
+
+</html>
