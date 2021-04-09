@@ -12,6 +12,11 @@ document.oncontextmenu = function() {
     return false;
 }
 
+const TILE_SIZE = 8;
+const LAYOUT = 1;
+const ISLAND_RADIUS = 30;
+const SEED = null;
+
 const input = {
     m1: false,
     m2: false,
@@ -78,24 +83,4 @@ function cycle() {
 function update() {
     game.wipe();
     game.drawTiles();
-}
-
-function setup() {
-  fetch('js/config.JSON')
-  .then(response => {
-      if (!response.ok) {
-          throw new Error("HTTP error " +   response.status);
-      }
-      return response.json();
-  })
-  .then(json => {
-      this.settings = json;
-      console.log(this.settings);
-      game.startGame()
-      const settings = JSON.parse(this.settings);
-      
-  })
-  .catch(function () {
-      this.dataError = true;
-  });
 }

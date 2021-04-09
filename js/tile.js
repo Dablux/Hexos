@@ -1,7 +1,7 @@
 const layouts = [layout_flat, layout_pointy];
 
 class Tile {
-    constructor(q = 0, r = 0, s = 0, terrain = {type: "none", fill: "#aaa", stroke: "#888"}, size = settings.TILE_SIZE) {
+    constructor(q = 0, r = 0, s = 0, terrain = {type: "none", fill: "#aaa", stroke: "#888"}, size = TILE_SIZE) {
       this.pos = {
         q: q,
         r: r,
@@ -16,7 +16,7 @@ class Tile {
       this.key = this.pos.q.toString() + "," + this.pos.r.toString() + "," + this.pos.s.toString();
     }
     layout() {
-        return Layout(layouts[settings.LAYOUT], Point(this.size, this.size), Point(0,0))
+        return Layout(layouts[LAYOUT], Point(this.size, this.size), Point(0,0))
     };
     points() {
        return polygon_corners(this.layout(), Hex(this.pos.q, this.pos.r, this.pos.s));
@@ -52,7 +52,7 @@ const cursorHex = {
     fill: "#000",
     size: 16,
     layout() {
-        return Layout(layouts[settings.LAYOUT], Point(this.size, this.size), Point(0,0))
+        return Layout(layouts[LAYOUT], Point(this.size, this.size), Point(0,0))
     },
     points() {
        return polygon_corners(this.layout(), Hex(this.pos.x, this.pos.y, this.pos.z));

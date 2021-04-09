@@ -65,22 +65,22 @@ const game = {
             m[i].draw();
         }
     },
-    seed() {
-        if(settings.SEED != null){
-            c = toDigit(settings.SEED);
+    seed(s) {
+        if(s != null){
+            c = toDigit(s);
         }else{
             c = toDigit(Date.now());
         }
         rand = Math.seed(c);
     },
-    startGame() {
+    startGame(finalSeed = SEED) {
         game.paused = false;
         game.fpsCap = game.fpsCapDefault;
         game.fpsInterval = 1000 / game.fpsCap;
         game.then = Date.now();
-        game.seed(settings.SEED);
+        game.seed(finalSeed);
         m = {};
-        map.generate(settings.ISLAND_RADIUS);
+        map.generate(ISLAND_RADIUS);
         requestAnimationFrame(cycle);
         update(); 
     }

@@ -12,9 +12,9 @@ const map = {
     generate(r) {
         map.island(r);
 
-        innerHalf = allKeys.filter(t => Math.abs(m[t].pos.q) <= Math.round(settings.ISLAND_RADIUS / 2) && Math.abs(m[t].pos.r) <= Math.round(settings.ISLAND_RADIUS / 2) && Math.abs(m[t].pos.s) <= Math.round(settings.ISLAND_RADIUS / 2))
+        innerHalf = allKeys.filter(t => Math.abs(m[t].pos.q) <= Math.round(ISLAND_RADIUS / 2) && Math.abs(m[t].pos.r) <= Math.round(ISLAND_RADIUS / 2) && Math.abs(m[t].pos.s) <= Math.round(ISLAND_RADIUS / 2))
 
-        outerHalf = allKeys.filter(t => Math.abs(m[t].pos.q) >= Math.round(settings.ISLAND_RADIUS / 2) || Math.abs(m[t].pos.r) >= Math.round(settings.ISLAND_RADIUS / 2) || Math.abs(m[t].pos.s) >= Math.round(settings.ISLAND_RADIUS / 2))
+        outerHalf = allKeys.filter(t => Math.abs(m[t].pos.q) >= Math.round(ISLAND_RADIUS / 2) || Math.abs(m[t].pos.r) >= Math.round(ISLAND_RADIUS / 2) || Math.abs(m[t].pos.s) >= Math.round(ISLAND_RADIUS / 2))
 
         map.splatter(10, m[map.getRandomKey(innerHalf)].pos, tileGrass);
         map.splatter(7, m[map.getRandomKey(innerHalf)].pos, tileGrass);
