@@ -10,6 +10,15 @@ var outerHalf = [];
 
 const map = {
     generate(r) {
+        allKeys= [];
+        grass = [];
+        stone = [];
+        tree = [];
+        water = [];
+        sand = [];
+        innerHalf = [];
+        outerHalf = [];
+
         map.island(r);
 
         innerHalf = allKeys.filter(t => Math.abs(m[t].pos.q) <= Math.round(ISLAND_RADIUS / 2) && Math.abs(m[t].pos.r) <= Math.round(ISLAND_RADIUS / 2) && Math.abs(m[t].pos.s) <= Math.round(ISLAND_RADIUS / 2))
