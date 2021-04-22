@@ -68,6 +68,12 @@ window.onresize = () => {
     update();
 };
 
+function shift_canvas(ctx, w, h, dx, dy) {
+  var imageData = ctx.getImageData(0, 0, w, h);
+  ctx.clearRect(0, 0, w, h);
+  ctx.putImageData(imageData, dx, dy);
+};
+
 function cycle() {
     if (!game.paused) requestAnimationFrame(cycle);
 
@@ -78,9 +84,10 @@ function cycle() {
         game.cycle++; //tracks game cycles
         game.loop();
     }
-}
+};
 
 function update() {
     game.wipe();
     game.drawTiles();
-}
+    //console.log(hex_to_pixel())
+};
