@@ -19,36 +19,41 @@ const map = {
         innerHalf = [];
         outerHalf = [];
 
+        variance = Math.round(ISLAND_RADIUS / 20)
+
+        size = function(s){
+          return Math.floor(ISLAND_RADIUS / s) + Math.floor(rand() * (variance * 2 + 1)) -variance
+        }
+
         map.island(r);
 
         innerHalf = allKeys.filter(t => Math.abs(m[t].pos.q) <= Math.round(ISLAND_RADIUS / 2) && Math.abs(m[t].pos.r) <= Math.round(ISLAND_RADIUS / 2) && Math.abs(m[t].pos.s) <= Math.round(ISLAND_RADIUS / 2))
 
         outerHalf = allKeys.filter(t => Math.abs(m[t].pos.q) >= Math.round(ISLAND_RADIUS / 2) || Math.abs(m[t].pos.r) >= Math.round(ISLAND_RADIUS / 2) || Math.abs(m[t].pos.s) >= Math.round(ISLAND_RADIUS / 2))
 
-        map.splatter(10, m[map.getRandomKey(innerHalf)].pos, tileGrass);
-        map.splatter(7, m[map.getRandomKey(innerHalf)].pos, tileGrass);
-        map.splatter(7, m[map.getRandomKey(innerHalf)].pos, tileGrass);
-        map.splatter(6, m[map.getRandomKey(innerHalf)].pos, tileGrass);
+        for(let i = 0; i < Math.floor(ISLAND_RADIUS / 7); i++){
+            map.splatter(size(5), m[map.getRandomKey(innerHalf)].pos, tileGrass);
+        }
 
-        map.splatter(6, m[map.getRandomKey(outerHalf)].pos, tileGrass);
-        map.splatter(5, m[map.getRandomKey(outerHalf)].pos, tileGrass);
-        map.splatter(4, m[map.getRandomKey(outerHalf)].pos, tileGrass);
-        map.splatter(5, m[map.getRandomKey(outerHalf)].pos, tileGrass);
-        map.splatter(4, m[map.getRandomKey(outerHalf)].pos, tileGrass);
+        map.splatter(Math.round(ISLAND_RADIUS / 5), m[map.getRandomKey(outerHalf)].pos, tileGrass);
+        map.splatter(Math.round(ISLAND_RADIUS / 6), m[map.getRandomKey(outerHalf)].pos, tileGrass);
+        map.splatter(Math.round(ISLAND_RADIUS / 7), m[map.getRandomKey(outerHalf)].pos, tileGrass);
+        map.splatter(Math.round(ISLAND_RADIUS / 5), m[map.getRandomKey(outerHalf)].pos, tileGrass);
+        map.splatter(Math.round(ISLAND_RADIUS / 6), m[map.getRandomKey(outerHalf)].pos, tileGrass);
 
-        map.splatter(8, m[map.getRandomKey(grass)].pos, tileSand);
+        map.splatter(Math.round(ISLAND_RADIUS / 4), m[map.getRandomKey(grass)].pos, tileSand);
 
-        map.splatter(7, m[map.getRandomKey(grass)].pos, tileTree);
-        map.splatter(7, m[map.getRandomKey(grass)].pos, tileStone);
+        map.splatter(Math.round(ISLAND_RADIUS / 4), m[map.getRandomKey(grass)].pos, tileTree);
+        map.splatter(Math.round(ISLAND_RADIUS / 4), m[map.getRandomKey(grass)].pos, tileStone);
 
-        map.splatter(3, m[map.getRandomKey(grass)].pos, tileTree);
-        map.splatter(3, m[map.getRandomKey(grass)].pos, tileTree);
-        map.splatter(2, m[map.getRandomKey(grass)].pos, tileStone);
-        map.splatter(2, m[map.getRandomKey(grass)].pos, tileStone);
-        map.splatter(2, m[map.getRandomKey(stone)].pos, tileStone);
-        map.splatter(2, m[map.getRandomKey(tree)].pos, tileTree);
+        map.splatter(Math.round(ISLAND_RADIUS / 10), m[map.getRandomKey(grass)].pos, tileTree);
+        map.splatter(Math.round(ISLAND_RADIUS / 10), m[map.getRandomKey(grass)].pos, tileTree);
+        map.splatter(Math.round(ISLAND_RADIUS / 15), m[map.getRandomKey(grass)].pos, tileStone);
+        map.splatter(Math.round(ISLAND_RADIUS / 15), m[map.getRandomKey(grass)].pos, tileStone);
+        map.splatter(Math.round(ISLAND_RADIUS / 15), m[map.getRandomKey(stone)].pos, tileStone);
+        map.splatter(Math.round(ISLAND_RADIUS / 15), m[map.getRandomKey(tree)].pos, tileTree);
 
-        map.splatter(3, m[map.getRandomKey(stone)].pos, tileSand);
+        map.splatter(Math.round(ISLAND_RADIUS / 10), m[map.getRandomKey(stone)].pos, tileSand);
 
         map.beach();
     },
