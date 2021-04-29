@@ -1,3 +1,4 @@
+//Updated
 const game = {
     loop() {
         game.cursorWipe();
