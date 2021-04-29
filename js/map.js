@@ -48,10 +48,10 @@ const map = {
 
         map.splatter(Math.round(ISLAND_RADIUS / 10), m[map.getRandomKey(grass)].pos, tileTree);
         map.splatter(Math.round(ISLAND_RADIUS / 10), m[map.getRandomKey(grass)].pos, tileTree);
-        map.splatter(Math.round(ISLAND_RADIUS / 15), m[map.getRandomKey(grass)].pos, tileStone);
-        map.splatter(Math.round(ISLAND_RADIUS / 15), m[map.getRandomKey(grass)].pos, tileStone);
-        map.splatter(Math.round(ISLAND_RADIUS / 15), m[map.getRandomKey(stone)].pos, tileStone);
-        map.splatter(Math.round(ISLAND_RADIUS / 15), m[map.getRandomKey(tree)].pos, tileTree);
+        map.splatter(Math.round(ISLAND_RADIUS / 12), m[map.getRandomKey(grass)].pos, tileStone);
+        map.splatter(Math.round(ISLAND_RADIUS / 12), m[map.getRandomKey(grass)].pos, tileStone);
+        map.splatter(Math.round(ISLAND_RADIUS / 12), m[map.getRandomKey(stone)].pos, tileStone);
+        map.splatter(Math.round(ISLAND_RADIUS / 12), m[map.getRandomKey(tree)].pos, tileTree);
 
         map.splatter(Math.round(ISLAND_RADIUS / 10), m[map.getRandomKey(stone)].pos, tileSand);
 
