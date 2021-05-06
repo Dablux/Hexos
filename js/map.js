@@ -7,6 +7,8 @@ var water = [];
 var sand = [];
 var innerHalf = [];
 var outerHalf = [];
+var onScreen = [];
+var offScreen = [];
 
 const map = {
     generate(r) {

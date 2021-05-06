@@ -35,12 +35,28 @@ class Tile {
         ctx.strokeStyle = this.stroke;
         ctx.lineWidth = 1;
         for(let i = 0; i < 6; i++) {
-            ctx.lineTo(p[i].x + canvas.width2, p[i].y + canvas.height2);
+            ctx.lineTo(((p[i].x + canvas.width2) /** zoom*/) + game.camera.x, ((p[i].y + canvas.height2) /** zoom*/) + game.camera.y);
         };
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
     };
+    canvasPos() {
+        let p = hex_to_pixel(Layout(layouts[LAYOUT], Point(/*zoom*/TILE_SIZE, /*zoom*/TILE_SIZE), Point(canvas.width2, canvas.height2)), m[this.key].pos);
+        p = {x: p.x + game.camera.x, y: p.y + game.camera.y}
+        return p;
+    };
+    isOnScreen() {
+        return this.canvasPos().x >= 0 - (TILE_SIZE + 5) && this.canvasPos().x <= canvas.width + (TILE_SIZE + 5) && this.canvasPos().y >= 0 - (TILE_SIZE + 5) && this.canvasPos().y <= canvas.height + (TILE_SIZE + 5)
+    };
+    onOff() {
+        if(this.isOnScreen()){
+            onScreen.push(this.key);
+        }else{
+            offScreen.push(this.key);
+
+        }
+    }
 };
 
 const cursorHex = {

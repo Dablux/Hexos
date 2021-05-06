@@ -12,10 +12,14 @@ document.oncontextmenu = function() {
     return false;
 }
 
-const TILE_SIZE = 8;
+const TILE_SIZE = 16;
 const LAYOUT = 1;
-const ISLAND_RADIUS = 30;
+const ISLAND_RADIUS = 50;
 const SEED = null;
+var CT = {
+    x: 100,
+    y: 100
+} //Camera tolerance
 
 const input = {
     m1: false,
@@ -42,6 +46,18 @@ document.body.addEventListener("mousedown", (e) => {
         input.m1 = true;
     }
 });
+/*document.body.addEventListener("wheel", (e) => {
+    if (e.deltaY > 0) {
+        zoom++;
+        zoom = Math.min(30, zoom);
+    } else if(zoom > 8){
+        zoom--;
+    }
+    setupCanvas();
+    update();
+}, {
+    passive: true
+});*/
 
 function setupCanvas() {
     canvas.width = window.innerWidth;
@@ -61,6 +77,9 @@ function setupCanvas() {
     cursor.font = "25px Arial";
     cursor.lineJoin = "round";
     cursor.lineCap = "round";
+
+    CT.x = canvas.width / 4;
+    CT.y = canvas.height / 4;
 }
 setupCanvas();
 window.onresize = () => {
@@ -68,11 +87,22 @@ window.onresize = () => {
     update();
 };
 
-function shift_canvas(ctx, w, h, dx, dy) {
+/*function shift_canvas(ctx, w, h, dx, dy) {
   var imageData = ctx.getImageData(0, 0, w, h);
   ctx.clearRect(0, 0, w, h);
   ctx.putImageData(imageData, dx, dy);
-};
+  game.camera.x += dx;
+  game.camera.y += dy;
+  setupCanvas();
+  update();
+};*/
+
+function cameraMove() {
+    if(game.mouse.x <= CT.x){game.camera.x += (CT.x - game.mouse.x) / (CT.x / 10)}
+    if(game.mouse.x >= canvas.width - CT.x){game.camera.x += (canvas.width - CT.x - game.mouse.x) / (CT.x / 10)}
+    if(game.mouse.y <= CT.y){game.camera.y += (CT.y - game.mouse.y) / (CT.y / 10)}
+    if(game.mouse.y >= canvas.height - CT.y){game.camera.y += (canvas.height - CT.y - game.mouse.y) / (CT.y / 10)}
+};    
 
 function cycle() {
     if (!game.paused) requestAnimationFrame(cycle);
@@ -89,5 +119,4 @@ function cycle() {
 function update() {
     game.wipe();
     game.drawTiles();
-    //console.log(hex_to_pixel())
 };

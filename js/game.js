@@ -1,8 +1,9 @@
-//Updated
 const game = {
     loop() {
         game.cursorWipe();
         game.drawCursor();
+        cameraMove();
+        update();
     },
     cycle: 0,
     camera:{
@@ -62,8 +63,16 @@ const game = {
         cursor.restore();
     },
     drawTiles() {
-        for(var i in m) {
-            m[i].draw();
+        //ctx.translate(canvas.width2 - (canvas.width2 * zoom), canvas.height2 - (canvas.height2 * zoom));
+        onScreen = [];
+        offScreen = [];
+
+        for(let i = 0; i < allKeys.length; i++) {
+            m[allKeys[i]].onOff();
+        }
+
+        for(let i = 0; i < onScreen.length; i++) {
+            m[onScreen[i]].draw();
         }
     },
     seed(s) {
@@ -82,6 +91,7 @@ const game = {
         game.seed(finalSeed);
         m = {};
         map.generate(ISLAND_RADIUS);
+        //zoom = 15;
         requestAnimationFrame(cycle);
         update(); 
     }
