@@ -24,6 +24,7 @@ var CT = {
 const input = {
     m1: false,
     m2: false,
+    m3: false
 }
 
 document.body.addEventListener("mousemove", (e) => {
@@ -34,6 +35,8 @@ document.body.addEventListener("mousemove", (e) => {
 document.body.addEventListener("mouseup", (e) => {
     if (e.which === 3) {
         input.m2 = false;
+    } else if (e.which === 2) {
+        input.m3 = false;
     } else {
         input.m1 = false;
     }
@@ -42,22 +45,27 @@ document.body.addEventListener("mouseup", (e) => {
 document.body.addEventListener("mousedown", (e) => {
     if (e.which === 3) {
         input.m2 = true;
+    } else if (e.which === 2){
+        input.m3 = true;
     } else {
         input.m1 = true;
     }
 });
-/*document.body.addEventListener("wheel", (e) => {
+document.body.addEventListener("wheel", (e) => {
     if (e.deltaY > 0) {
-        zoom++;
-        zoom = Math.min(30, zoom);
-    } else if(zoom > 8){
-        zoom--;
+        game.p++;
+        if (game.p == game.paint.length) {
+            game.p = 0;
+        }
+    } else {
+        game.p--;
+        if (game.p == -1) {
+            game.p = game.paint.length - 1;
+        }
     }
-    setupCanvas();
-    update();
 }, {
     passive: true
-});*/
+});
 
 function setupCanvas() {
     canvas.width = window.innerWidth;
