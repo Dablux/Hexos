@@ -14,6 +14,7 @@ class Tile {
       this.size = size;
       this.tag = "";
       this.key = this.pos.q.toString() + "," + this.pos.r.toString() + "," + this.pos.s.toString();
+      this.cPos = null;
     }
     layout() {
         return Layout(layouts[LAYOUT], Point(this.size, this.size), Point(0,0))
@@ -41,19 +42,20 @@ class Tile {
         ctx.fill();
         ctx.stroke();
     };
-    canvasPos() {
+    getCanvasPos() {
         let p = hex_to_pixel(Layout(layouts[LAYOUT], Point(/*zoom*/TILE_SIZE, /*zoom*/TILE_SIZE), Point(canvas.width2, canvas.height2)), m[this.key].pos);
         p = {x: p.x + game.camera.x, y: p.y + game.camera.y}
-        return p;
+        this.cPos = p;
     };
     isOnScreen() {
-        return this.canvasPos().x >= 0 - (TILE_SIZE + 5) && this.canvasPos().x <= canvas.width + (TILE_SIZE + 5) && this.canvasPos().y >= 0 - (TILE_SIZE + 5) && this.canvasPos().y <= canvas.height + (TILE_SIZE + 5)
+        this.getCanvasPos();
+        return this.cPos.x >= 0 - (TILE_SIZE + 5) && this.cPos.x <= canvas.width + (TILE_SIZE + 5) && this.cPos.y >= 0 - (TILE_SIZE + 5) && this.cPos.y <= canvas.height + (TILE_SIZE + 5)
     };
     onOff() {
         if(this.isOnScreen()){
             onScreen.push(this.key);
-        }else{
-            offScreen.push(this.key);
+        //}else{
+          //  offScreen.push(this.key);
 
         }
     }
@@ -80,28 +82,30 @@ const cursorHex = {
 };
 
 //Tile presets
-tileGrass = {
-    type: "grass",
-    fill: "#8a8",
-    stroke: "#000"
-};
-tileStone = {
-    type: "stone",
-    fill: "#888",
-    stroke: "#000"
-};
-tileTree = {
-    type: "tree",
-    fill: "#061",
-    stroke: "#000"
-};
-tileWater = {
-    type: "water",
-    fill: "#08d",
-    stroke: "#000"
-};
-tileSand = {
-    type: "sand",
-    fill: "#ff7",
-    stroke: "#000"
-};
+const allTerrain = {
+    "tileGrass": {
+        type: "grass",
+        fill: "#382",
+        stroke: "#000"
+    },
+    "tileStone": {
+        type: "stone",
+        fill: "#888",
+        stroke: "#000"
+    },
+    "tileTree": {
+        type: "tree",
+        fill: "#061",
+        stroke: "#000"
+    },
+    "tileWater": {
+        type: "water",
+        fill: "#08d",
+        stroke: "#000"
+    },
+    "tileSand": {
+        type: "sand",
+        fill: "#ff7",
+        stroke: "#000"
+    }
+}

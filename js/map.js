@@ -34,34 +34,34 @@ const map = {
         outerHalf = allKeys.filter(t => Math.abs(m[t].pos.q) >= Math.round(ISLAND_RADIUS / 2) || Math.abs(m[t].pos.r) >= Math.round(ISLAND_RADIUS / 2) || Math.abs(m[t].pos.s) >= Math.round(ISLAND_RADIUS / 2))
 
         for(let i = 0; i < Math.floor(ISLAND_RADIUS / 7); i++){
-            map.splatter(size(5), m[map.getRandomKey(innerHalf)].pos, tileGrass);
+            map.splatter(size(5), m[map.getRandomKey(innerHalf)].pos, allTerrain["tileGrass"]);
         }
 
-        map.splatter(Math.round(ISLAND_RADIUS / 5), m[map.getRandomKey(outerHalf)].pos, tileGrass);
-        map.splatter(Math.round(ISLAND_RADIUS / 6), m[map.getRandomKey(outerHalf)].pos, tileGrass);
-        map.splatter(Math.round(ISLAND_RADIUS / 7), m[map.getRandomKey(outerHalf)].pos, tileGrass);
-        map.splatter(Math.round(ISLAND_RADIUS / 5), m[map.getRandomKey(outerHalf)].pos, tileGrass);
-        map.splatter(Math.round(ISLAND_RADIUS / 6), m[map.getRandomKey(outerHalf)].pos, tileGrass);
+        map.splatter(Math.round(ISLAND_RADIUS / 5), m[map.getRandomKey(outerHalf)].pos, allTerrain["tileGrass"]);
+        map.splatter(Math.round(ISLAND_RADIUS / 6), m[map.getRandomKey(outerHalf)].pos, allTerrain["tileGrass"]);
+        map.splatter(Math.round(ISLAND_RADIUS / 7), m[map.getRandomKey(outerHalf)].pos, allTerrain["tileGrass"]);
+        map.splatter(Math.round(ISLAND_RADIUS / 5), m[map.getRandomKey(outerHalf)].pos, allTerrain["tileGrass"]);
+        map.splatter(Math.round(ISLAND_RADIUS / 6), m[map.getRandomKey(outerHalf)].pos, allTerrain["tileGrass"]);
 
-        map.splatter(Math.round(ISLAND_RADIUS / 4), m[map.getRandomKey(grass)].pos, tileSand);
+        map.splatter(Math.round(ISLAND_RADIUS / 4), m[map.getRandomKey(grass)].pos, allTerrain["tileSand"]);
 
-        map.splatter(Math.round(ISLAND_RADIUS / 4), m[map.getRandomKey(grass)].pos, tileTree);
-        map.splatter(Math.round(ISLAND_RADIUS / 4), m[map.getRandomKey(grass)].pos, tileStone);
+        map.splatter(Math.round(ISLAND_RADIUS / 4), m[map.getRandomKey(grass)].pos, allTerrain["tileTree"]);
+        map.splatter(Math.round(ISLAND_RADIUS / 4), m[map.getRandomKey(grass)].pos, allTerrain["tileStone"]);
 
-        map.splatter(Math.round(ISLAND_RADIUS / 10), m[map.getRandomKey(grass)].pos, tileTree);
-        map.splatter(Math.round(ISLAND_RADIUS / 10), m[map.getRandomKey(grass)].pos, tileTree);
-        map.splatter(Math.round(ISLAND_RADIUS / 12), m[map.getRandomKey(grass)].pos, tileStone);
-        map.splatter(Math.round(ISLAND_RADIUS / 12), m[map.getRandomKey(grass)].pos, tileStone);
-        map.splatter(Math.round(ISLAND_RADIUS / 12), m[map.getRandomKey(stone)].pos, tileStone);
-        map.splatter(Math.round(ISLAND_RADIUS / 12), m[map.getRandomKey(tree)].pos, tileTree);
+        map.splatter(Math.round(ISLAND_RADIUS / 10), m[map.getRandomKey(grass)].pos, allTerrain["tileTree"]);
+        map.splatter(Math.round(ISLAND_RADIUS / 10), m[map.getRandomKey(grass)].pos, allTerrain["tileTree"]);
+        map.splatter(Math.round(ISLAND_RADIUS / 12), m[map.getRandomKey(grass)].pos, allTerrain["tileStone"]);
+        map.splatter(Math.round(ISLAND_RADIUS / 12), m[map.getRandomKey(grass)].pos, allTerrain["tileStone"]);
+        map.splatter(Math.round(ISLAND_RADIUS / 12), m[map.getRandomKey(stone)].pos, allTerrain["tileStone"]);
+        map.splatter(Math.round(ISLAND_RADIUS / 12), m[map.getRandomKey(tree)].pos, allTerrain["tileTree"]);
 
-        map.splatter(Math.round(ISLAND_RADIUS / 10), m[map.getRandomKey(stone)].pos, tileSand);
+        map.splatter(Math.round(ISLAND_RADIUS / 10), m[map.getRandomKey(stone)].pos, allTerrain["tileSand"]);
 
         map.beach();
     },
     addToMap(tiles) {
         for(let i = 0; i < tiles.length; i++) {
-            let t = new Tile(tiles[i].q, tiles[i].r, tiles[i].s, tileWater);
+            let t = new Tile(tiles[i].q, tiles[i].r, tiles[i].s, allTerrain["tileWater"]);
             m[t.key] = t; 
             water.push(t);
             allKeys.push(t.key);
@@ -154,6 +154,24 @@ const map = {
                 }
             }
         }
-        map.updateTileTypes(keys, tileSand);
+        map.updateTileTypes(keys, allTerrain["tileSand"]);
+    },
+    export() {
+        var save = "[";
+        for(let i = 0; i < 7; i++){
+            let s = "";
+            s += "{key:\"";
+            s += m[allKeys[i]].key;
+            s += "\",terrain:\"tile";
+            s += m[allKeys[i]].type;
+            s = s.replace(s[s.length - m[allKeys[i]].type.length], s[s.length - m[allKeys[i]].type.length].toUpperCase())
+            s += "\"},"
+            save += s;
+        }
+        save += "]";
+        console.log(save)
+    },
+    load() {
+
     }
 };

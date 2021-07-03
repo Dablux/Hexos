@@ -19,7 +19,7 @@ const game = {
     fpsCapDefault: 60,
     fpsInterval: 0,
     m: 0,
-    paint: [null, tileGrass, tileStone, tileTree, tileWater, tileSand],
+    paint: [null, allTerrain["tileGrass"], allTerrain["tileStone"], allTerrain["tileTree"], allTerrain["tileWater"], allTerrain["tileSand"]],
     p: 1,
     wipe() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -115,7 +115,7 @@ const game = {
     cycleTile() {
         if (input.m1) {
             const H = m[map.posToKey(hex_round(pixel_to_hex(Layout(layouts[LAYOUT], Point(TILE_SIZE, TILE_SIZE), Point(canvas.width2,canvas.height2)), Point(game.mouse.x - game.camera.x, game.mouse.y - game.camera.y))))]
-            if (game.paint[game.p] != null){
+            if (H != undefined && game.paint[game.p] != null){
                 H.terrain = game.paint[game.p]; 
             }
         }
