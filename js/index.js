@@ -3,6 +3,8 @@ var cursorCanvas = document.getElementById("cursorCanvas");
 //using "const" causes problems in safari when an ID shares the same name.
 const cursor = cursorCanvas.getContext("2d");
 const ctx = canvas.getContext("2d");
+var lastMousePos = {x:0, y:0};
+//console.log(lastMousePos);
 
 document.body.style.backgroundColor = "#fff";
 document.body.style.cursor = "none";
@@ -45,6 +47,8 @@ document.body.addEventListener("mouseup", (e) => {
 document.body.addEventListener("mousedown", (e) => {
     if (e.which === 3) {
         input.m2 = true;
+        lastMousePos.x = game.mouse.x; 
+        lastMousePos.y = game.mouse.y;
     } else if (e.which === 2){
         input.m3 = true;
     } else {
@@ -106,10 +110,17 @@ window.onresize = () => {
 };*/
 
 function cameraMove() {
-    if(game.mouse.x <= CT.x){game.camera.x += (CT.x - game.mouse.x) / (CT.x / 10)}
+    /*if(game.mouse.x <= CT.x){game.camera.x += (CT.x - game.mouse.x) / (CT.x / 10)}
     if(game.mouse.x >= canvas.width - CT.x){game.camera.x += (canvas.width - CT.x - game.mouse.x) / (CT.x / 10)}
     if(game.mouse.y <= CT.y){game.camera.y += (CT.y - game.mouse.y) / (CT.y / 10)}
-    if(game.mouse.y >= canvas.height - CT.y){game.camera.y += (canvas.height - CT.y - game.mouse.y) / (CT.y / 10)}
+    if(game.mouse.y >= canvas.height - CT.y){game.camera.y += (canvas.height - CT.y - game.mouse.y) / (CT.y / 10)}*/
+
+     console.log(game.mouse.x - lastMousePos.x, game.mouse.y - lastMousePos.y);
+     game.camera.x += game.mouse.x - lastMousePos.x;
+     game.camera.y += game.mouse.y - lastMousePos.y;
+
+     lastMousePos.x = game.mouse.x; 
+     lastMousePos.y = game.mouse.y;
 };    
 
 function cycle() {

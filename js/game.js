@@ -2,10 +2,10 @@ const game = {
     loop() {
         game.cursorWipe();
         game.drawCursor();
-        if (input.m2)
-        cameraMove();
         game.cycleTile();
         update();
+        if(input.m2)
+        cameraMove();
     },
     cycle: 0,
     camera:{
