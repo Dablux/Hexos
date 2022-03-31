@@ -154,6 +154,14 @@ const map = {
                 }
             }
         }
+        for(let i = 0; i < tree.length; i++) {
+            let r = map.ring(1, m[tree[i]].pos);
+            for(let j = 0; j < r.length; j++) {
+                if(r[j] in m && !(tree[i] in keys) && m[r[j]].type == "water") {
+                    keys.push(tree[i])
+                }
+            }
+        }
         map.updateTileTypes(keys, allTerrain["tileSand"]);
     },
     export() {

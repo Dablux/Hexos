@@ -115,7 +115,7 @@ function cameraMove() {
     if(game.mouse.y <= CT.y){game.camera.y += (CT.y - game.mouse.y) / (CT.y / 10)}
     if(game.mouse.y >= canvas.height - CT.y){game.camera.y += (canvas.height - CT.y - game.mouse.y) / (CT.y / 10)}*/
 
-     console.log(game.mouse.x - lastMousePos.x, game.mouse.y - lastMousePos.y);
+     //console.log(game.mouse.x - lastMousePos.x, game.mouse.y - lastMousePos.y);
      game.camera.x += game.mouse.x - lastMousePos.x;
      game.camera.y += game.mouse.y - lastMousePos.y;
 
